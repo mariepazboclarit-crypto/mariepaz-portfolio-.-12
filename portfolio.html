@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name — Social Media Strategist</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0d;
+    --paper: #f5f2ed;
+    --cream: #ede9e1;
+    --accent: #c94f2a;
+    --accent2: #2a7a5c;
+    --muted: #7a7570;
+    --border: #d8d3ca;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: var(--paper);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.1rem; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.88rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta { background: var(--ink); color: var(--paper); padding: 0.55rem 1.3rem; border-radius: 2rem; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 72px;
+  }
+  .hero-left {
+    padding: 7rem 4rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.5rem;
+  }
+  .hero-tag::before { content: ''; width: 24px; height: 1.5px; background: var(--accent); }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 1.05rem; color: var(--muted); max-width: 420px;
+    margin-bottom: 2.5rem; line-height: 1.7;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--ink); color: var(--paper);
+    padding: 0.8rem 2rem; border-radius: 2rem;
+    font-size: 0.9rem; font-weight: 500; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+  .btn-outline {
+    border: 1.5px solid var(--border); color: var(--ink);
+    padding: 0.8rem 2rem; border-radius: 2rem;
+    font-size: 0.9rem; font-weight: 500; text-decoration: none;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--ink); transform: translateY(-1px); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 4rem;
+    padding-top: 2rem; border-top: 1px solid var(--border);
+  }
+  .stat-val { font-family: 'DM Serif Display', serif; font-size: 2rem; line-height: 1; }
+  .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+
+  .hero-right {
+    background: var(--cream);
+    border-left: 1px solid var(--border);
+    padding: 5rem 3rem;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .hero-right::before {
+    content: ''; position: absolute;
+    width: 320px; height: 320px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,79,42,0.12) 0%, transparent 70%);
+    top: -80px; right: -80px;
+  }
+  .social-preview {
+    background: white;
+    border-radius: 16px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+    position: relative;
+    animation: floatUp 0.6s ease both;
+  }
+  .social-preview:nth-child(2) { animation-delay: 0.1s; transform: translateX(20px); }
+  .social-preview:nth-child(3) { animation-delay: 0.2s; }
+  @keyframes floatUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .preview-platform { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 6px; }
+  .preview-metric { font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--accent2); }
+  .preview-label { font-size: 0.82rem; color: var(--muted); }
+  .preview-bar {
+    height: 4px; background: var(--cream); border-radius: 2px;
+    margin-top: 10px; overflow: hidden;
+  }
+  .preview-bar-fill { height: 100%; border-radius: 2px; animation: fillBar 1.2s ease both; }
+  @keyframes fillBar { from { width: 0 !important; } }
+
+  /* SERVICES */
+  .section { padding: 6rem 4rem; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before { content: ''; width: 20px; height: 1.5px; background: var(--accent); }
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1; letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+  }
+
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px;
+    background: var(--border); border: 1.5px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+  }
+  .service-card {
+    background: var(--paper); padding: 2rem;
+    transition: background 0.2s;
+  }
+  .service-card:hover { background: var(--cream); }
+  .service-num { font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--border); margin-bottom: 1rem; }
+  .service-title { font-weight: 500; font-size: 1.05rem; margin-bottom: 0.6rem; }
+  .service-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+  .service-tag {
+    display: inline-block; margin-top: 1rem;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em;
+    background: var(--cream); border: 1px solid var(--border);
+    padding: 3px 10px; border-radius: 20px; color: var(--muted);
+  }
+
+  /* PORTFOLIO / CASE STUDIES */
+  .cases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .case-card {
+    border: 1.5px solid var(--border); border-radius: 16px;
+    overflow: hidden; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .case-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(15,14,13,0.1); }
+  .case-visual {
+    height: 200px; display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif; font-size: 3rem; letter-spacing: -0.03em;
+    position: relative; overflow: hidden;
+  }
+  .case-visual span { position: relative; z-index: 1; }
+  .case-body { padding: 1.5rem; background: white; }
+  .case-client { font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 6px; }
+  .case-title { font-weight: 500; font-size: 1.1rem; margin-bottom: 0.6rem; }
+  .case-result { font-size: 0.88rem; color: var(--muted); }
+  .case-metrics { display: flex; gap: 1.5rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+  .case-metric-val { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--accent); }
+  .case-metric-label { font-size: 0.72rem; color: var(--muted); }
+
+  /* PROCESS */
+  .process-strip {
+    background: var(--ink); color: var(--paper);
+    padding: 6rem 4rem;
+  }
+  .process-strip .section-label { color: var(--accent); }
+  .process-strip .section-label::before { background: var(--accent); }
+  .process-strip h2 { color: var(--paper); }
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+  .process-step { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1.5rem; }
+  .step-num { font-family: 'DM Serif Display', serif; font-size: 3rem; color: rgba(255,255,255,0.15); line-height: 1; margin-bottom: 1rem; }
+  .step-title { font-weight: 500; margin-bottom: 0.5rem; }
+  .step-desc { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+  /* PACKAGES */
+  .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .pkg-card {
+    border: 1.5px solid var(--border); border-radius: 16px;
+    padding: 2rem; background: white;
+    transition: transform 0.2s;
+  }
+  .pkg-card:hover { transform: translateY(-3px); }
+  .pkg-card.featured { border-color: var(--accent); background: var(--ink); color: var(--paper); }
+  .pkg-badge { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; background: var(--accent); color: white; padding: 3px 10px; border-radius: 20px; display: inline-block; margin-bottom: 1rem; }
+  .pkg-name { font-family: 'DM Serif Display', serif; font-size: 1.5rem; margin-bottom: 0.3rem; }
+  .pkg-price { font-family: 'DM Serif Display', serif; font-size: 2.5rem; line-height: 1; margin: 1rem 0; }
+  .pkg-price span { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 400; }
+  .pkg-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.2rem; line-height: 1.5; }
+  .pkg-card.featured .pkg-desc { color: rgba(255,255,255,0.6); }
+  .pkg-features { list-style: none; }
+  .pkg-features li { font-size: 0.88rem; padding: 0.5rem 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+  .pkg-card.featured .pkg-features li { border-bottom-color: rgba(255,255,255,0.1); }
+  .pkg-features li::before { content: '→'; color: var(--accent2); font-size: 0.75rem; }
+  .pkg-cta {
+    display: block; text-align: center; margin-top: 1.5rem;
+    padding: 0.75rem; border-radius: 2rem; font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; border: 1.5px solid var(--border);
+    color: var(--ink); transition: all 0.2s;
+  }
+  .pkg-cta:hover { border-color: var(--ink); }
+  .pkg-card.featured .pkg-cta { background: var(--accent); border-color: var(--accent); color: white; }
+  .pkg-card.featured .pkg-cta:hover { background: #a83f20; }
+
+  /* CONTACT */
+  .contact-strip {
+    background: var(--cream); border-top: 1px solid var(--border);
+    padding: 6rem 4rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+  }
+  .contact-form-group { margin-bottom: 1.2rem; }
+  .contact-form-group label { display: block; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .contact-form-group input,
+  .contact-form-group textarea,
+  .contact-form-group select {
+    width: 100%; padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    background: white; font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+    color: var(--ink); outline: none;
+    transition: border-color 0.2s;
+  }
+  .contact-form-group input:focus,
+  .contact-form-group textarea:focus,
+  .contact-form-group select:focus { border-color: var(--ink); }
+  .contact-form-group textarea { height: 110px; resize: vertical; }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.82rem; color: var(--muted);
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--ink); }
+
+  /* FADE IN */
+  .fade { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 5rem 1.5rem 3rem; }
+    .section { padding: 4rem 1.5rem; }
+    .services-grid, .cases-grid, .packages-grid, .process-steps { grid-template-columns: 1fr; }
+    .contact-strip { grid-template-columns: 1fr; gap: 2rem; padding: 4rem 1.5rem; }
+    .process-strip { padding: 4rem 1.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Your Name</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Let's talk</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Social Media Strategist</div>
+    <h1>Turning <em>scrolls</em> into customers.</h1>
+    <p class="hero-sub">I help local businesses and growing brands build social media presence that actually drives sales — not just likes.</p>
+    <div class="hero-actions">
+      <a href="#work" class="btn-primary">See my work</a>
+      <a href="#contact" class="btn-outline">Get a free audit</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-val">3×</div>
+        <div class="stat-label">avg. engagement lift</div>
+      </div>
+      <div>
+        <div class="stat-val">12+</div>
+        <div class="stat-label">platforms managed</div>
+      </div>
+      <div>
+        <div class="stat-val">100%</div>
+        <div class="stat-label">on-time delivery</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="social-preview">
+      <div class="preview-platform">Instagram · Sample Client</div>
+      <div class="preview-metric">+284%</div>
+      <div class="preview-label">reach growth in 60 days</div>
+      <div class="preview-bar"><div class="preview-bar-fill" style="width:84%;background:#c94f2a;"></div></div>
+    </div>
+    <div class="social-preview">
+      <div class="preview-platform">Facebook · Sample Client</div>
+      <div class="preview-metric">4.8×</div>
+      <div class="preview-label">return on ad spend</div>
+      <div class="preview-bar"><div class="preview-bar-fill" style="width:72%;background:#2a7a5c;"></div></div>
+    </div>
+    <div class="social-preview">
+      <div class="preview-platform">TikTok · Sample Client</div>
+      <div class="preview-metric">18K</div>
+      <div class="preview-label">new followers in 30 days</div>
+      <div class="preview-bar"><div class="preview-bar-fill" style="width:60%;background:#c94f2a;"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-label">What I do</div>
+  <h2 class="fade">Full-stack social<br>media management.</h2>
+  <div class="services-grid fade">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-title">Content Creation</div>
+      <div class="service-desc">Scroll-stopping graphics, captions, and reels crafted for your brand voice and target audience.</div>
+      <span class="service-tag">Instagram · TikTok · Facebook</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-title">Social Media Strategy</div>
+      <div class="service-desc">Data-driven posting calendars, hashtag research, and content pillars aligned to your business goals.</div>
+      <span class="service-tag">Strategy · Planning · Analytics</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-title">Paid Ads Management</div>
+      <div class="service-desc">Facebook and Instagram ad campaigns set up, optimized, and reported on — budget big or small.</div>
+      <span class="service-tag">Meta Ads · Boosted Posts</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-title">Community Management</div>
+      <div class="service-desc">Daily engagement — responding to comments, DMs, and growing real relationships with your audience.</div>
+      <span class="service-tag">Engagement · DMs · Comments</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-title">Social Media Audit</div>
+      <div class="service-desc">A full review of your current profiles with a clear action plan to fix gaps and improve performance.</div>
+      <span class="service-tag">Audit · Action Plan</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-title">Brand Setup</div>
+      <div class="service-desc">New to social? I'll set up your profiles, create branded templates, and launch your first campaign.</div>
+      <span class="service-tag">New Accounts · Branding</span>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="section" id="work" style="background:var(--cream);">
+  <div class="section-label">Sample work</div>
+  <h2 class="fade">Results I<em> create.</em></h2>
+  <p style="color:var(--muted);margin-top:-1.5rem;margin-bottom:2.5rem;font-size:0.9rem;">*These are sample case studies demonstrating my approach and capabilities.</p>
+  <div class="cases-grid">
+    <div class="case-card fade">
+      <div class="case-visual" style="background:#fde8e0;color:#c94f2a;">
+        <span>Café Uno ☕</span>
+      </div>
+      <div class="case-body">
+        <div class="case-client">Sample · Food & Beverage</div>
+        <div class="case-title">Growing a local café's Instagram from 200 to 2,400 followers</div>
+        <div class="case-result">Created a consistent visual brand, daily Stories, and weekly Reels showcasing the café's atmosphere and specials.</div>
+        <div class="case-metrics">
+          <div><div class="case-metric-val">+1,100%</div><div class="case-metric-label">follower growth</div></div>
+          <div><div class="case-metric-val">8.4%</div><div class="case-metric-label">avg engagement rate</div></div>
+          <div><div class="case-metric-val">3mo</div><div class="case-metric-label">timeframe</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="case-card fade">
+      <div class="case-visual" style="background:#e0ede8;color:#2a7a5c;">
+        <span>GlowSkin 💚</span>
+      </div>
+      <div class="case-body">
+        <div class="case-client">Sample · Beauty & Wellness</div>
+        <div class="case-title">Launching a skincare brand's Facebook page with paid ads</div>
+        <div class="case-result">Set up a product launch campaign targeting women 18–35 in the Philippines with a ₱5,000/month budget.</div>
+        <div class="case-metrics">
+          <div><div class="case-metric-val">4.6×</div><div class="case-metric-label">ROAS</div></div>
+          <div><div class="case-metric-val">₱18</div><div class="case-metric-label">cost per click</div></div>
+          <div><div class="case-metric-val">62</div><div class="case-metric-label">orders in month 1</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="case-card fade">
+      <div class="case-visual" style="background:#e8e4f5;color:#534AB7;">
+        <span>PropNest 🏠</span>
+      </div>
+      <div class="case-body">
+        <div class="case-client">Sample · Real Estate</div>
+        <div class="case-title">Building trust and leads through educational content</div>
+        <div class="case-result">Developed a content calendar of property tips, market updates, and client testimonial Reels for a local broker.</div>
+        <div class="case-metrics">
+          <div><div class="case-metric-val">220%</div><div class="case-metric-label">reach increase</div></div>
+          <div><div class="case-metric-val">14</div><div class="case-metric-label">leads per month</div></div>
+          <div><div class="case-metric-val">5★</div><div class="case-metric-label">client satisfaction</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="case-card fade">
+      <div class="case-visual" style="background:#fdf0e0;color:#ba7517;">
+        <span>FitMove 🏋️</span>
+      </div>
+      <div class="case-body">
+        <div class="case-client">Sample · Health & Fitness</div>
+        <div class="case-title">Scaling a fitness coach's TikTok to drive online bookings</div>
+        <div class="case-result">Created short-form workout content and CTAs leading to a booking link, growing from 0 to 8K TikTok followers.</div>
+        <div class="case-metrics">
+          <div><div class="case-metric-val">8,400</div><div class="case-metric-label">TikTok followers</div></div>
+          <div><div class="case-metric-val">32</div><div class="case-metric-label">new clients</div></div>
+          <div><div class="case-metric-val">45 days</div><div class="case-metric-label">timeframe</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-strip" id="process">
+  <div class="section-label">How it works</div>
+  <h2 class="fade">Simple, clear,<br>no guesswork.</h2>
+  <div class="process-steps fade">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-title">Discovery call</div>
+      <div class="step-desc">We talk about your business, goals, and what's been working (or not). Free and no commitment.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-title">Strategy & plan</div>
+      <div class="step-desc">I build a custom content strategy and calendar for your brand before we produce anything.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-title">Create & publish</div>
+      <div class="step-desc">Content goes live on schedule. You review and approve before anything is posted.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <div class="step-title">Report & improve</div>
+      <div class="step-desc">Monthly performance reports with clear numbers. We adjust the strategy based on what works.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="section" id="packages">
+  <div class="section-label">Pricing</div>
+  <h2 class="fade">Simple packages,<br>transparent rates.</h2>
+  <div class="packages-grid fade">
+    <div class="pkg-card">
+      <div class="pkg-name">Starter</div>
+      <div class="pkg-price">₱6,500 <span>/ month</span></div>
+      <div class="pkg-desc">Perfect for small businesses just getting started with social media.</div>
+      <ul class="pkg-features">
+        <li>12 posts per month</li>
+        <li>Captions + hashtag research</li>
+        <li>1 platform (IG or FB)</li>
+        <li>Monthly analytics report</li>
+        <li>Content calendar</li>
+      </ul>
+      <a href="#contact" class="pkg-cta">Get started</a>
+    </div>
+    <div class="pkg-card featured">
+      <div class="pkg-badge">Most popular</div>
+      <div class="pkg-name">Growth</div>
+      <div class="pkg-price">₱12,500 <span>/ month</span></div>
+      <div class="pkg-desc">For businesses ready to grow their audience and drive real results.</div>
+      <ul class="pkg-features">
+        <li>20 posts per month</li>
+        <li>2 platforms (IG + FB)</li>
+        <li>Stories & Reels included</li>
+        <li>Community management</li>
+        <li>Bi-weekly reports</li>
+        <li>Strategy consultation</li>
+      </ul>
+      <a href="#contact" class="pkg-cta">Get started</a>
+    </div>
+    <div class="pkg-card">
+      <div class="pkg-name">Pro</div>
+      <div class="pkg-price">₱22,000 <span>/ month</span></div>
+      <div class="pkg-desc">Full-service management for brands serious about social media ROI.</div>
+      <ul class="pkg-features">
+        <li>Unlimited content</li>
+        <li>3 platforms + TikTok</li>
+        <li>Paid ads management</li>
+        <li>Daily engagement</li>
+        <li>Weekly reports + calls</li>
+        <li>Priority response</li>
+      </ul>
+      <a href="#contact" class="pkg-cta">Get started</a>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:1.5rem;font-size:0.85rem;color:var(--muted);">Not sure which fits? Message me for a custom quote — I work with any budget.</p>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-strip" id="contact">
+  <div class="fade">
+    <div class="section-label">Get in touch</div>
+    <h2>Let's grow<br>your brand.</h2>
+    <p style="color:var(--muted);margin-bottom:2rem;line-height:1.7;">I offer a free 30-minute social media audit for new clients. No pressure, just honest feedback on what's working and what to improve.</p>
+    <div style="display:flex;flex-direction:column;gap:1rem;">
+      <div style="display:flex;align-items:center;gap:12px;font-size:0.9rem;">
+        <span style="color:var(--accent);font-size:1.1rem;">✉</span>
+        <span style="color:var(--muted);">yourname@email.com</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;font-size:0.9rem;">
+        <span style="color:var(--accent);font-size:1.1rem;">📱</span>
+        <span style="color:var(--muted);">+63 9XX XXX XXXX</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;font-size:0.9rem;">
+        <span style="color:var(--accent);font-size:1.1rem;">📍</span>
+        <span style="color:var(--muted);">Cagayan de Oro, Philippines · Available worldwide</span>
+      </div>
+    </div>
+  </div>
+  <div class="fade">
+    <div style="background:white;border-radius:16px;border:1.5px solid var(--border);padding:2rem;">
+      <div class="contact-form-group">
+        <label>Your name</label>
+        <input type="text" placeholder="Juan dela Cruz">
+      </div>
+      <div class="contact-form-group">
+        <label>Email or Facebook</label>
+        <input type="text" placeholder="juan@email.com">
+      </div>
+      <div class="contact-form-group">
+        <label>What do you need?</label>
+        <select>
+          <option>Content creation</option>
+          <option>Social media management</option>
+          <option>Paid ads</option>
+          <option>Free audit</option>
+          <option>Custom package</option>
+        </select>
+      </div>
+      <div class="contact-form-group">
+        <label>Tell me about your business</label>
+        <textarea placeholder="What do you sell, who are your customers, what's your goal?"></textarea>
+      </div>
+      <button onclick="alert('Thanks! In your real site, connect this to email or a form service like Formspree.')" style="width:100%;padding:0.85rem;background:var(--ink);color:white;border:none;border-radius:2rem;font-family:inherit;font-size:0.95rem;font-weight:500;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='#c94f2a'" onmouseout="this.style.background='#0f0e0d'">Send message →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2025 Your Name · Social Media Strategist · Cagayan de Oro, PH</div>
+  <div style="display:flex;gap:1.5rem;">
+    <a href="#">LinkedIn</a>
+    <a href="#">Instagram</a>
+    <a href="#">Facebook</a>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
